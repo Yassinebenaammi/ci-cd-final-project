@@ -54,15 +54,11 @@ def create_counters(name):
     app.logger.info("Request to Create counter: %s...", name)
 
     if name in COUNTER:
-        return abort(
-            status.HTTP_409_CONFLICT, f"Counter {name} already exists"
-            )
+        return abort(status.HTTP_409_CONFLICT, f"Counter {name} already exists")
 
     COUNTER[name] = 0
 
-    location_url = url_for(
-        "read_counters", name=name, _external=True
-        )
+    location_url = url_for("read_counters", name=name, _external=True)
     return (
         jsonify(name=name, counter=0),
         status.HTTP_201_CREATED,
@@ -114,7 +110,6 @@ def delete_counters(name):
         COUNTER.pop(name)
 
     return "", status.HTTP_204_NO_CONTENT
-
 
 
 ############################################################
